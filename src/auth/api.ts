@@ -102,7 +102,7 @@ export class AuthApi {
    // Local revocation must succeed even if the remote provider is temporarily unavailable.
    const raw=cookies(req)[SESSION];if(!raw)return response({message:'Logged out'},200,[cookie(SESSION,'',0),cookie(CSRF,'',0,false)]);
    let t:Tokens|undefined;
-   await this.store.transaction(async s=>{const row=await s.lockSession(hash(raw));if(!row)return;if(!equalHash(req.headers.get('x-csrf-token')??'',row.csrf_hash))fail(403,'CSRF_REQUIRED');t=this.vault.open<Tokens>(row.encrypted_tokens);if(b.all===true)await s.revokeSessions(row.user_id);else await s.deleteSession(row.token_hash);});
+   await this.store.transaction(async s=>{const row=await s.lockSession(hash(raw));if(!row){await s.deleteSession(hash(raw));return;}if(!equalHash(req.headers.get('x-csrf-token')??'',row.csrf_hash))fail(403,'CSRF_REQUIRED');t=this.vault.open<Tokens>(row.encrypted_tokens);if(b.all===true)await s.revokeSessions(row.user_id);else await s.deleteSession(row.token_hash);});
    if(t)try{await this.provider.logout(t,b.all===true);}catch{/* Local opaque session is already revoked. */}
    return response({message:'Logged out'},200,[cookie(SESSION,'',0),cookie(CSRF,'',0,false)]);
   }
