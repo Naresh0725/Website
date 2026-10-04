@@ -9,22 +9,24 @@
   "scripts": {
     "typecheck": "tsc",
     "test": "node --import tsx --test --test-concurrency=1 tests/*.test.ts",
-    "migrate": "node --import tsx src/migrate.ts"
+    "migrate": "node --import tsx src/migrate.ts",
+    "start": "node --import tsx src/server.ts"
   },
   "keywords": [],
   "author": "",
   "license": "UNLICENSED",
   "type": "module",
   "dependencies": {
+    "@supabase/supabase-js": "^2.117.2",
     "pg": "^8.23.1"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
     "@types/emscripten": "^1.41.6",
     "@types/node": "^26.6.4",
     "@types/pg": "^8.23.1",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2",
-    "@electric-sql/pglite": "^0.5.8"
+    "typescript": "^7.0.2"
   },
   "private": true,
   "engines": {

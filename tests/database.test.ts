@@ -4,6 +4,7 @@ import { randomUUID,createHmac } from 'node:crypto';
 import { readFile,readdir } from 'node:fs/promises';
 import { PGlite } from '@electric-sql/pglite';
 import { Pool } from 'pg';
+import { registerAuthTests } from './auth-cases.js';
 import { verifySignature } from '../src/payment-verification.js';
 let lite:PGlite|undefined; let pool:Pool|undefined;
 async function q(sql:string,args:unknown[]=[]):Promise<any[]> { return pool ? (await pool.query(sql,args)).rows : (await lite!.query(sql,args)).rows; }
@@ -72,3 +73,13 @@ test('native PostgreSQL: start versus restore preserves ledger',{skip:!process.e
 
 test('native PostgreSQL: simultaneous payment activation grants one period',{skip:!process.env.TEST_DATABASE_URL},async()=>{const u=await user(),{o}=await order(u),p='pay_'+key();const ids=await Promise.all(Array.from({length:12},()=>pay(o,p)));assert.equal(new Set(ids).size,1);assert.equal((await q('SELECT count(*)::int n FROM exam.payments WHERE order_id=$1',[o]))[0].n,1);});
 test('native PostgreSQL: concurrent subscribed starts and expiry enforce access',{skip:!process.env.TEST_DATABASE_URL},async()=>{const u=await user();await start(u);await start(u);const period=await pay((await order(u)).o);const ids=await Promise.all(Array.from({length:12},()=>start(u)));assert.equal(new Set(ids).size,12);assert.equal(await used(u),2);assert.equal((await q("SELECT count(*)::int n FROM exam.attempt_authorizations aa JOIN exam.user_attempts a ON a.id=aa.attempt_id WHERE a.user_id=$1 AND aa.authorization_type='subscription'",[u]))[0].n,12);await q("UPDATE exam.subscription_periods SET starts_at=now()-interval '721 hours',ends_at=now()-interval '1 hour' WHERE id=$1",[period]);const results=await Promise.allSettled(Array.from({length:12},()=>start(u)));for(const r of results){assert.equal(r.status,'rejected');if(r.status==='rejected')assert.match(String(r.reason),/SUBSCRIPTION_REQUIRED/);}assert.equal(await used(u),2);});
+
+// PgAuthStore is exercised through least-privilege exam_auth connections.
+const authDriver={
+ async query(sql:string,args:unknown[]=[]){const c=await authDriver.connect();try{return await c.query(sql,args);}finally{c.release();}},
+ async connect(){
+  if(pool){const c=await pool.connect();await c.query('SET ROLE exam_auth');return {query:(sql:string,args:unknown[]=[])=>c.query(sql,args),release:()=>{void c.query('RESET ROLE').finally(()=>c.release());}};}
+  await lite!.query('SET ROLE exam_auth');return {query:async(sql:string,args:unknown[]=[])=>({rows:await q(sql,args)}),release:()=>{void lite!.query('RESET ROLE');}};
+ }
+};
+registerAuthTests(()=>authDriver as unknown as Pool,q,!!process.env.TEST_DATABASE_URL);

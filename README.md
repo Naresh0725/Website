@@ -1,10 +1,14 @@
-# Government Exam Platform — database foundation
+# Government Exam Platform — authentication and database foundation
 
 Native PostgreSQL concurrency gate: **30 passed, 0 failed, 0 skipped**. See [validation report](docs/concurrency-validation.md).
 
 Independent project, created 4 October 2026. No previous project or question bank is included.
 
-## Implemented now
+## Authentication phase
+
+Account-only pages and a Node HTTP service now implement registration, email confirmation, login/logout, forgot/reset password, Google PKCE login, profile editing, database roles/permissions, MFA-backed role administration, and encrypted server-side sessions. See [authentication setup and API](docs/authentication.md). Live provider configuration is still required; no unrelated project credentials are used.
+
+## Implemented database foundation
 
 - PostgreSQL schema for identity, exams/syllabuses, versioned questions and PYQ evidence, tests, attempts, answers, results, analytics, billing, and administration.
 - Atomic `start_attempt`, account provisioning, owner-scoped attempt lookup, and usage lookup.
@@ -26,7 +30,7 @@ A purely offline click cannot reach a server. An unauthenticated request, unpubl
 
 ## What is not built in this phase
 
-No student/admin UI, deployed website, HTTP routes, complete CBT answer-saving/submission/scoring engine, dynamic blueprint generator, analytics worker, live checkout/webhook pipeline, refunds workflow, live Supabase project, or production database. These have schema support but are subsequent development phases. Blueprint attempts deliberately fail closed until generation is implemented. Fixed published fixtures exercise entitlement behavior now.
+No exam/mock/dashboard/payment UI, deployed website, complete CBT answer-saving/submission/scoring engine, dynamic blueprint generator, analytics worker, live checkout/webhook pipeline, refunds workflow, live Supabase project, or production database. These have schema support but are subsequent development phases. Blueprint attempts deliberately fail closed until generation is implemented. Fixed published fixtures exercise entitlement behavior now.
 
 The server adapters need real infrastructure and verified session integration before deployment. Credentials are not included. A DB owner can always override a database: application/browser roles cannot. Never use the migration-owner connection for request handling.
 
