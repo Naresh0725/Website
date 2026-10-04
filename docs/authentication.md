@@ -12,7 +12,7 @@ This phase adds account-only pages and an HTTP service. It does not expose exam,
 
 ## Server architecture
 
-`src/server.ts` provides the Node HTTP service. `src/auth/api.ts` enforces request, CSRF, identity and scope checks. `src/auth/provider.ts` integrates the official Supabase client. `src/auth/store.ts` uses the restricted `exam_auth` database role. Migration `005_authentication.sql` creates sessions, OAuth flow state, durable rate limits and security events; adds student/account-admin roles; and leaves the existing two-free-attempt balance intact.
+`src/server.ts` provides the Node HTTP service. `src/auth/api.ts` enforces request, CSRF, identity and scope checks. `src/auth/provider.ts` integrates the official Supabase client. `src/auth/store.ts` uses the restricted `exam_auth` database role. Migration `005_authentication.sql` creates sessions, OAuth flow state, durable rate limits and security events; adds student/account-admin roles; migration 006 makes deadline calculation use one clock snapshot; and leaves the existing two-free-attempt balance intact.
 
 Provider passwords are sent only to Supabase Auth and are never stored by this application. The SDK is instantiated per operation, using server-side memory/storage, with automatic refresh disabled. The database session lock coordinates refresh across application instances.
 
@@ -20,7 +20,7 @@ Provider passwords are sent only to Supabase Auth and are never stored by this a
 
 No live provider account or credentials were supplied, and no unrelated project credentials were reused. To connect a new deployment:
 
-1. Use a **new** Supabase project; apply all five migrations and `db/deployment/supabase_identity.sql`.
+1. Use a **new** Supabase project; apply all six migrations and `db/deployment/supabase_identity.sql`.
 2. Create separate migration and runtime credentials. The auth server login receives `GRANT exam_auth TO <auth_login>` only; never use the database owner or Supabase service-role key to serve requests.
 3. Set the variables in `.env.example`, including HTTPS `APP_ORIGIN`, `AUTH_DATABASE_URL`, new-project Supabase URL and publishable key, and a 32-byte random encryption key.
 4. Enable email/password authentication and email confirmation. Enable suitable provider password policy and production SMTP. Confirmation is intentionally required even if a provider accidentally returns an unverified session.
