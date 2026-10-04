@@ -24,6 +24,3 @@ No double-consumption or entitlement bypass was observed in these tested scenari
 No database business-rule changes were needed for this run. The restoration race assertion was strengthened to require restoration success and reject unexpected start errors; two subscription-specific concurrency tests were added.
 
 No UI was built or deployment performed. Changes remain on the test branch; main has only the initialization README. Await user approval before the next phase.
-
-## Earlier local run
-The initial embedded PostgreSQL run had 25 passes and 3 skipped native tests. That limitation is now resolved by the native CI run above.

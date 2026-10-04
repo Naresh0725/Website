@@ -1,5 +1,7 @@
 # Government Exam Platform — database foundation
 
+Native PostgreSQL concurrency gate: **30 passed, 0 failed, 0 skipped**. See [validation report](docs/concurrency-validation.md).
+
 Independent project, created 4 October 2026. No previous project or question bank is included.
 
 ## Implemented now
@@ -38,7 +40,7 @@ npm run typecheck
 npm test
 ```
 
-The default test run uses PGlite, an embedded PostgreSQL engine, without external services. It exercises SQL migrations, permissions, functions and triggers. It does NOT prove multi-connection locking. Three native PostgreSQL tests are explicitly skipped in this mode.
+The default test run uses PGlite, an embedded PostgreSQL engine, without external services. It exercises SQL migrations, permissions, functions and triggers. It does NOT prove multi-connection locking. Five native PostgreSQL tests are explicitly skipped in this mode.
 
 For a dedicated EMPTY PostgreSQL 17+ database:
 
@@ -46,7 +48,7 @@ For a dedicated EMPTY PostgreSQL 17+ database:
 TEST_DATABASE_URL=postgres://USER:PASSWORD@localhost:5432/EMPTY_TEST_DB ALLOW_EMPTY_TEST_DATABASE=yes npm test
 ```
 
-The native run includes separate-connection contention tests. `.github/workflows/database.yml` defines this gate using PostgreSQL 17; it has not been run remotely. Never point the tests at an existing application database.
+The native run includes separate-connection contention tests. `.github/workflows/database.yml` defines this gate using PostgreSQL 17; the native run passed on 4 October 2026 (see validation report). Never point the tests at an existing application database.
 
 PowerShell environment variables can be set with `$env:TEST_DATABASE_URL = "..."` and `$env:ALLOW_EMPTY_TEST_DATABASE = "yes"`, followed by `npm test`.
 
@@ -87,4 +89,4 @@ Do not grant these roles to Supabase `anon`, `authenticated`, or any browser-acc
 
 ## Production gate
 
-Do not launch until native PostgreSQL concurrency tests pass, authentication is integrated end-to-end, billing sandbox reconciliation/webhooks are tested, and the full CBT lifecycle is implemented and verified. No production readiness or live payment validation is claimed by this package.
+The native PostgreSQL concurrency gate passed. Before launch, authentication must be integrated end-to-end, billing sandbox reconciliation/webhooks are tested, and the full CBT lifecycle is implemented and verified. No production readiness or live payment validation is claimed by this package.
