@@ -1,0 +1,33 @@
+{
+  "name": "government-exam-platform-foundation",
+  "version": "1.0.0",
+  "description": "Independent government exam platform database and entitlement foundation",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "typecheck": "tsc",
+    "test": "node --import tsx --test --test-concurrency=1 tests/*.test.ts",
+    "migrate": "node --import tsx src/migrate.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "type": "module",
+  "dependencies": {
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "@types/emscripten": "^1.41.6",
+    "@types/node": "^26.6.4",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "@electric-sql/pglite": "^0.5.8"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  }
+}

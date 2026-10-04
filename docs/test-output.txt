@@ -1,0 +1,41 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> government-exam-platform-foundation@1.0.0 test
+> node --import tsx --test --test-concurrency=1 tests/*.test.ts
+
+✔ all proposed entities exist and RLS is enabled (1653.820274ms)
+✔ first two starts free, third requires subscription immediately (31.603381ms)
+✔ same start key replays same attempt without spending twice (9.155313ms)
+✔ same key with changed test rejected (7.987881ms)
+✔ refresh and provisioning on login do not reset allowance (19.259408ms)
+✔ abandoned in-progress attempts remain consumed (8.339602ms)
+✔ invalid start rolls back without consuming or creating attempt (3.577308ms)
+✔ cross-user resume and unknown identities rejected (6.995564ms)
+✔ suspended users cannot start or resume (6.351163ms)
+✔ ordinary runtime cannot mutate allowances, read keys, restore or activate payments (7.318511ms)
+✔ support role still requires verified administrator permission (5.592308ms)
+✔ restoration is audited, idempotent, and permits one replacement (16.462217ms)
+✔ missing incident evidence rejected (5.677115ms)
+✔ audit and free usage ledger are append-only (1.081392ms)
+✔ verified payment grants exactly 720 hours and attempt 3 (14.549841ms)
+✔ early subscription does not change first-two-FREE rule (8.452162ms)
+✔ duplicate payment does not extend access again (6.132842ms)
+✔ wrong amount cannot create subscription (4.42764ms)
+✔ subscription expiration blocks new starts but retains existing attempt (16.867219ms)
+✔ future or revoked subscription cannot unlock mocks (14.518895ms)
+✔ exam-restricted subscription does not cover unrelated exam (8.581026ms)
+✔ non-30-day subscription intervals rejected (13.042307ms)
+✔ paid attempt cannot manufacture free credits through restoration (11.997842ms)
+✔ published question, key and test are immutable (2.456496ms)
+✔ signature validation rejects altered and malformed values (0.785636ms)
+﹣ native PostgreSQL: 12 simultaneous starts permit exactly 2 (0.045379ms) # SKIP
+﹣ native PostgreSQL: simultaneous retries consume once (0.034833ms) # SKIP
+﹣ native PostgreSQL: start versus restore preserves ledger (0.024547ms) # SKIP
+ℹ tests 28
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 3
+ℹ todo 0
+ℹ duration_ms 2177.400427
