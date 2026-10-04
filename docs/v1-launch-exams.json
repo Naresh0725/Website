@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "status": "approved_scope",
+  "approved_exam_count": 10,
+  "pyq_history": {
+    "minimum_supported_years": 10,
+    "initial_inventory_window": {
+      "from": 2016,
+      "to": 2025
+    },
+    "older_years_supported": true,
+    "current_year_incremental": true,
+    "coverage_guaranteed": false
+  },
+  "bulk_import_authorized": false,
+  "exams": [
+    {
+      "slug": "ssc-cgl",
+      "name": "SSC CGL",
+      "family": "ssc"
+    },
+    {
+      "slug": "rrb-ntpc",
+      "name": "RRB NTPC",
+      "family": "rrb"
+    },
+    {
+      "slug": "ssc-chsl",
+      "name": "SSC CHSL",
+      "family": "ssc"
+    },
+    {
+      "slug": "rrb-group-d",
+      "name": "RRB Group D",
+      "family": "rrb"
+    },
+    {
+      "slug": "ibps-po",
+      "name": "IBPS PO",
+      "family": "banking"
+    },
+    {
+      "slug": "sbi-po",
+      "name": "SBI PO",
+      "family": "banking"
+    },
+    {
+      "slug": "ibps-clerk-csa",
+      "name": "IBPS Clerk/CSA",
+      "family": "banking"
+    },
+    {
+      "slug": "sbi-clerk",
+      "name": "SBI Clerk",
+      "family": "banking"
+    },
+    {
+      "slug": "rrb-technician",
+      "name": "RRB Technician",
+      "family": "rrb"
+    },
+    {
+      "slug": "ssc-mts",
+      "name": "SSC MTS",
+      "family": "ssc"
+    }
+  ]
+}
