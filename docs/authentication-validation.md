@@ -31,5 +31,3 @@ Application endpoints and database operations were tested against real PostgreSQ
 Live provider verification remains pending a new project's Supabase/SMTP/Google OAuth configuration and deployment host. No credentials from another project were inspected or reused. See authentication.md for exact setup and endpoints.
 
 Only account/authentication pages and APIs were built. No exam/question features, mock-test UI, dashboard, payment UI or later-phase implementation was added. No production deployment or merge to main was performed. Await approval before the next phase.
-
-Previous phase: [30-test concurrency validation](concurrency-validation.md).

@@ -1,0 +1,61 @@
+2026-10-04T19:42:29.8883879Z ok 1 - all proposed entities exist and RLS is enabled
+2026-10-04T19:42:29.9077358Z ok 2 - first two starts free, third requires subscription immediately
+2026-10-04T19:42:29.9167527Z ok 3 - same start key replays same attempt without spending twice
+2026-10-04T19:42:29.9228134Z ok 4 - same key with changed test rejected
+2026-10-04T19:42:29.9385915Z ok 5 - refresh and provisioning on login do not reset allowance
+2026-10-04T19:42:29.9454468Z ok 6 - abandoned in-progress attempts remain consumed
+2026-10-04T19:42:29.9501744Z ok 7 - invalid start rolls back without consuming or creating attempt
+2026-10-04T19:42:29.9570474Z ok 8 - cross-user resume and unknown identities rejected
+2026-10-04T19:42:29.9642733Z ok 9 - suspended users cannot start or resume
+2026-10-04T19:42:29.9690434Z ok 10 - ordinary runtime cannot mutate allowances, read keys, restore or activate payments
+2026-10-04T19:42:29.9757819Z ok 11 - support role still requires verified administrator permission
+2026-10-04T19:42:29.9936765Z ok 12 - restoration is audited, idempotent, and permits one replacement
+2026-10-04T19:42:30.0010979Z ok 13 - missing incident evidence rejected
+2026-10-04T19:42:30.0126652Z ok 14 - audit and free usage ledger are append-only
+2026-10-04T19:42:30.0451041Z ok 15 - verified payment grants exactly 720 hours and attempt 3
+2026-10-04T19:42:30.0588182Z ok 16 - early subscription does not change first-two-FREE rule
+2026-10-04T19:42:30.0657657Z ok 17 - duplicate payment does not extend access again
+2026-10-04T19:42:30.0712037Z ok 18 - wrong amount cannot create subscription
+2026-10-04T19:42:30.0889282Z ok 19 - subscription expiration blocks new starts but retains existing attempt
+2026-10-04T19:42:30.1009941Z ok 20 - future or revoked subscription cannot unlock mocks
+2026-10-04T19:42:30.1117729Z ok 21 - exam-restricted subscription does not cover unrelated exam
+2026-10-04T19:42:30.1394138Z ok 22 - non-30-day subscription intervals rejected
+2026-10-04T19:42:30.1780279Z ok 23 - paid attempt cannot manufacture free credits through restoration
+2026-10-04T19:42:30.2043203Z ok 24 - published question, key and test are immutable
+2026-10-04T19:42:30.2047431Z ok 25 - signature validation rejects altered and malformed values
+2026-10-04T19:42:30.2950033Z ok 26 - native PostgreSQL: 12 simultaneous starts permit exactly 2
+2026-10-04T19:42:30.3107754Z ok 27 - native PostgreSQL: simultaneous retries consume once
+2026-10-04T19:42:30.3280607Z ok 28 - native PostgreSQL: start versus restore preserves ledger
+2026-10-04T19:42:30.3477421Z ok 29 - native PostgreSQL: simultaneous payment activation grants one period
+2026-10-04T19:42:30.4801580Z ok 30 - native PostgreSQL: concurrent subscribed starts and expiry enforce access
+2026-10-04T19:42:30.4914553Z ok 31 - auth: registration validates password and ignores no privilege fields
+2026-10-04T19:42:30.5156830Z ok 32 - auth: duplicate registration and forgot password use non-enumerating responses
+2026-10-04T19:42:30.5349976Z ok 33 - auth: verified login sets hardened opaque cookies; tokens encrypted at rest
+2026-10-04T19:42:30.5448969Z ok 34 - auth: session deadlines share one clock snapshot with exact duration
+2026-10-04T19:42:30.5530384Z ok 35 - auth: wrong password and unverified email cannot create sessions
+2026-10-04T19:42:30.5853855Z ok 36 - auth: origin and CSRF defenses block cross-site login and profile changes
+2026-10-04T19:42:30.5978171Z ok 37 - auth: profile belongs to session identity and rejects injected user IDs
+2026-10-04T19:42:30.6129734Z ok 38 - auth: logout revokes session even if provider signout is unavailable
+2026-10-04T19:42:30.6270920Z ok 39 - auth: logout while suspended permanently deletes the old browser session
+2026-10-04T19:42:30.6456349Z ok 40 - auth: session fixation prevented and old cookie revoked after login
+2026-10-04T19:42:30.6657129Z ok 41 - auth: idle expiry and suspension deny access
+2026-10-04T19:42:30.7613190Z ok 42 - auth: login rate limiting persists in PostgreSQL
+2026-10-04T19:42:30.7849560Z ok 43 - auth: password reset requires recovery session and revokes all account sessions
+2026-10-04T19:42:30.7914367Z ok 44 - auth: invalid/replayed email verification fails; signup verification logs in
+2026-10-04T19:42:30.8058300Z ok 45 - auth: Google PKCE callback binds browser, expires once, rejects replay
+2026-10-04T19:42:30.8131166Z ok 46 - auth: expired OAuth flow does not grant access
+2026-10-04T19:42:30.8396380Z ok 47 - auth: MFA challenges require CSRF and rotate the session on success
+2026-10-04T19:42:30.8698668Z ok 48 - auth: student cannot escalate role; admin requires MFA and audit
+2026-10-04T19:42:30.8950355Z ok 49 - auth: authentication does not reset a consumed free allowance
+2026-10-04T19:42:30.9051624Z ok 50 - auth: Supabase SDK generates PKCE Google URL with server-only verifier storage
+2026-10-04T19:42:30.9056131Z ok 51 - auth: real Supabase SDK MFA adapter accepts expires_in response contract
+2026-10-04T19:42:30.9059880Z ok 52 - auth: cryptographic tampering rejected
+2026-10-04T19:42:30.9062660Z ok 53 - auth: account and confirmation pages use nonce CSP without reflecting URL secrets
+2026-10-04T19:42:30.9065322Z ok 54 - auth: malformed requests do not expose internal errors
+2026-10-04T19:42:30.9599634Z ok 55 - auth: concurrent refresh uses one provider token rotation
+2026-10-04T19:42:30.9949929Z # tests 55
+2026-10-04T19:42:30.9950676Z # pass 55
+2026-10-04T19:42:30.9951035Z # fail 0
+2026-10-04T19:42:30.9951959Z # skipped 0
+2026-10-04T19:42:31.4111818Z  waiting for server to start....2026-10-04 19:42:16.314 UTC [48] LOG:  starting PostgreSQL 17.11 (Debian 17.11-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2026-10-04T19:42:31.4125397Z  2026-10-04 19:42:16.622 UTC [1] LOG:  starting PostgreSQL 17.11 (Debian 17.11-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit

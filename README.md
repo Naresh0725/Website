@@ -1,6 +1,6 @@
 # Government Exam Platform — authentication and database foundation
 
-Native PostgreSQL concurrency gate: **30 passed, 0 failed, 0 skipped**. See [validation report](docs/concurrency-validation.md).
+Latest authentication + database CI: **55 passed, 0 failed, 0 skipped**. See [authentication validation](docs/authentication-validation.md). The previous concurrency approval is recorded in [its report](docs/concurrency-validation.md).
 
 Independent project, created 4 October 2026. No previous project or question bank is included.
 
